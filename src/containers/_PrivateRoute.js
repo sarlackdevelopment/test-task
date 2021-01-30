@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Route, Redirect, withRouter} from 'react-router-dom';
 import {recieveAuth} from '../actions';
 
-class PrivateRoute extends React.Component {
+class _PrivateRoute extends React.Component {
     componentDidMount() {
         this.props.recieveAuth();
     }
@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(PrivateRoute));
+)(_PrivateRoute));

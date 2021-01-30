@@ -1,9 +1,9 @@
 import React from 'react';
 // import {Redirect} from 'react-router-dom';
 import LoginForm from './LoginForm';
-import SignupForm from './SignupForm';
+//import SignupForm from './SignupForm';
 
-class WelcomePage extends React.Component {
+class welcomePage extends React.Component {
     state = {
         vhod: true
     }
@@ -23,15 +23,16 @@ class WelcomePage extends React.Component {
     }
 
     render() {
-        const {signup, login, isAuthenticated} = this.props;
+        //const {signup, login, isAuthenticated} = this.props;
+        const {login} = this.props;
 
-        let classVhod = 'nav-link';
-        let classRegister = 'nav-link';
-        if (this.state.vhod) {
-            classVhod = classVhod + ' active';
-        } else {
-            classRegister = classRegister + ' active';
-        }
+        // let classVhod = 'nav-link';
+        // let classRegister = 'nav-link';
+        // if (this.state.vhod) {
+        //     classVhod = classVhod + ' active';
+        // } else {
+        //     classRegister = classRegister + ' active';
+        // }
 
         // if (isAuthenticated){
         //     return (
@@ -41,26 +42,34 @@ class WelcomePage extends React.Component {
         return (
             <div className="card text-center">
                 <div className="card-header">
-                    <ul className="nav nav-tabs card-header-tabs">
-                        <li className="nav-item" onClick={this.onSubmitVhod}>
-                            <p className={classVhod}>Вход</p>
-                        </li>
-                        <li className="nav-item" onClick={this.onSubmitRegister}>
-                            <p className={classRegister}>Регистрация</p>
-                        </li>
-                    </ul>
+                    <h3 className='nav-link'>Вход</h3>
                 </div>
                 <div className="card-body">
-                    {this.state.vhod ? (
-                        <LoginForm onSubmit={login} />
-                    ) : (
-                        <SignupForm onSubmit={signup} />
-                    )
-                    }
+                    <LoginForm onSubmit={login} />
                 </div>
             </div>
+            // <div className="card text-center">
+            //     <div className="card-header">
+            //         <ul className="nav nav-tabs card-header-tabs">
+            //             <li className="nav-item" onClick={this.onSubmitVhod}>
+            //                 <p className={classVhod}>Вход</p>
+            //             </li>
+            //             <li className="nav-item" onClick={this.onSubmitRegister}>
+            //                 <p className={classRegister}>Регистрация</p>
+            //             </li>
+            //         </ul>
+            //     </div>
+            //     <div className="card-body">
+            //         {this.state.vhod ? (
+            //             <LoginForm onSubmit={login} />
+            //         ) : (
+            //             <SignupForm onSubmit={signup} />
+            //         )
+            //         }
+            //     </div>
+            // </div>
         )
     }
 }
 
-export default WelcomePage;
+export default welcomePage;

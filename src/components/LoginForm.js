@@ -24,8 +24,6 @@ class LoginForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        //const { login, password } = this.state;
-        //this.props.onSubmit(login.value, password.value);
         this.props.onSubmit(new FormData(this.ref.current));
     }
 
