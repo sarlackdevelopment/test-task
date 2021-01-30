@@ -72,6 +72,12 @@ export function login(formData){
                 }
                 throw new Error(json.message);
             })
+            .catch(reason => {
+                return dispatch({
+                    type: types.LOGIN_FAILURE,
+                    payload: reason
+                })
+            });
     };
 }
 
