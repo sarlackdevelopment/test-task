@@ -1,11 +1,11 @@
 import React from 'react';
 import TodoPage from '../containers/TodoPage';
+import LoginPage from '../containers/LoginPage';
 import WelcomePage from '../containers/WelcomePage';
-//import _PaginationPage from "./_PaginationPage";
 
-const App = () =>(
+const App = () => (
     <>
-        <WelcomePage />
+        {localStorage.getItem('token') ? <WelcomePage /> : <LoginPage />}
         <TodoPage />
     </>
 );

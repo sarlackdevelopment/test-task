@@ -62,8 +62,6 @@ class TodoPage extends React.Component {
                 {item}
             </th>))
 
-        debugger
-
         const elements = tasks.map((item) => {
             const {id, username, email, text} = item;
             return (

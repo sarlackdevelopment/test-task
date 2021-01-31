@@ -1,19 +1,16 @@
 import React from 'react';
-import LoginForm from './LoginForm';
 
-const welcomePage = ({login}) => {
+const WelcomePage = ({logout}) => {
     return (
         <div className='container'>
             <div className="card text-center">
                 <div className="card-header">
-                    <h3 className='nav-link'>Вход</h3>
+                    <h3 className='nav-link'>Приветствую, о повелитель задач!</h3>
                 </div>
-                <div className="card-body">
-                    <LoginForm onSubmit={login} />
-                </div>
+                <button onClick={logout} className="btn btn-primary btn-lg btn-block mb-1" type="submit">Выход</button>
             </div>
         </div>
     )
 }
 
-export default welcomePage
+export default WelcomePage
