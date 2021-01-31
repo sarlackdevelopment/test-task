@@ -3,9 +3,7 @@ import {connect} from 'react-redux';
 import {fetchTodo} from '../actions/todo';
 import TodoPage from '../components/TodoPage';
 
-const mapStateToProps = state => {
-    return { todo: state.todo.todo };
-}
+const mapStateToProps = state => ({todo: state.todo.todo});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchTodo
