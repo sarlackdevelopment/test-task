@@ -7,7 +7,6 @@ const App = () =>(
     <>
         <WelcomePage />
         <TodoPage />
-        {/*<_PaginationPage />*/}
     </>
 );
 

@@ -2,7 +2,7 @@ import * as types from '../constants/todo';
 import callApi from '../utils/call-api';
 import fetch from "isomorphic-fetch";
 
-export function fetchTodo(page = 1) {
+export function fetchTodo(page = 1, sort_field = 'id', sort_direction = 'asc') {
     return (dispatch, getState) => {
         //const {token} = getState().auth;
 
@@ -19,7 +19,7 @@ export function fetchTodo(page = 1) {
         //         type: types.FETCH_TODO_FAILURE,
         //         payload: reason
         //     }))
-        return fetch(`https://uxcandy.com/~shapoval/test-task-backend/v2?developer=Alex&page=${page}`)
+        return fetch(`https://uxcandy.com/~shapoval/test-task-backend/v2?developer=Alex&page=${page}&sort_field=${sort_field}&sort_direction=${sort_direction}`)
             .then(response => {
                 return response.json()
             })
