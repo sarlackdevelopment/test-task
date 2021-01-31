@@ -38,3 +38,32 @@ export function fetchTodo(page = 1, sort_field = 'id', sort_direction = 'asc') {
             }))
     };
 }
+
+export function createTask(payload) {
+    return (dispatch) => {
+        dispatch({
+            type: types.CREATE_TASK_REQUEST
+        })
+        return fetch(`https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Alex`,
+            {
+                method: 'POST',
+                body: payload
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                if (json.status === 'ok') {
+                    dispatch({
+                        type: types.CREATE_TASK_SUCCESS,
+                        payload: json.message
+                    })
+                }
+                throw new Error(json.message);
+            })
+            .catch(reason => dispatch({
+                type: types.CREATE_TASK_FAILURE,
+                payload: reason
+            }))
+    };
+}

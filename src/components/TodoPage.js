@@ -1,5 +1,7 @@
 import React from 'react';
 
+import CreateTaskPage from '../containers/CreateTaskPage';
+
 class TodoPage extends React.Component {
 
     currentPage = 1;
@@ -15,10 +17,8 @@ class TodoPage extends React.Component {
     handlePage = (event) => {
         event.preventDefault();
         const { fetchTodo } = this.props;
-        //event.target.parentNode.classList.add('active');
         this.currentPage = Number(event.target.textContent);
         Promise.all([
-            //fetchTodo(Number(event.target.textContent)),
             fetchTodo(this.currentPage)
         ])
     }
@@ -62,6 +62,8 @@ class TodoPage extends React.Component {
                 {item}
             </th>))
 
+        debugger
+
         const elements = tasks.map((item) => {
             const {id, username, email, text} = item;
             return (
@@ -85,6 +87,7 @@ class TodoPage extends React.Component {
         return (
             <div className='container'>
                 <h1 className="text-center">Список задач</h1>
+                <CreateTaskPage />
                 <table className="table mb-3">
                     <thead>
                         <tr>
@@ -95,7 +98,6 @@ class TodoPage extends React.Component {
                         {elements}
                     </tbody>
                 </table>
-
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center d-flex flex-wrap">
                         {paginationElements}
