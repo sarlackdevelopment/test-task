@@ -24,7 +24,7 @@ export default function configureStore() {
             )
         )
         if (module.hot) {
-            module.hot.accept('../reducers', ()=>{
+            module.hot.accept('../reducers', () => {
                 store.replaceReducer(rootReducer)
             })
         }

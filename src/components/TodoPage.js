@@ -39,6 +39,19 @@ class TodoPage extends React.Component {
         ])
     }
 
+    handleChange = (event) => {
+        event.preventDefault();
+        const { updateTask } = this.props;
+        const { id, status, text } = event.currentTarget.dataset;
+        const formData = new FormData();
+        formData.append("text", text);
+        formData.append("status", status);
+        formData.append("token", localStorage.getItem('token'));
+        Promise.all([
+            updateTask(id, formData)
+        ])
+    }
+
     render() {
         const { todo } = this.props;
         const { tasks, total_task_count } = todo;
@@ -56,20 +69,54 @@ class TodoPage extends React.Component {
                     d="M3.5 13.5a.5.5 0 0 1-1 0V4.707L1.354 5.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 4.707V13.5zm4-9.5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
             </svg>
 
-        const fields = ['id', 'Username', 'Email', 'Text'].map((item) => (
+        const fields = ['id', 'status', 'Username', 'Email', 'Text'].map((item) => (
             <th style={{cursor: 'pointer'}} onClick={this.handleSort} scope="col">
-                {this.sortField === item ? sortIconDesc : sortIconAsc}
+                {item !== 'status' && this.sortField === item ? sortIconDesc : sortIconAsc}
                 {item}
             </th>))
 
         const elements = tasks.map((item) => {
-            const {id, username, email, text} = item;
+            const {id, username, email, text, status} = item;
+            const isAdmin = !localStorage.getItem('token');
+
             return (
                 <tr>
                     <th scope="row">{id}</th>
-                    <td>{username}</td>
-                    <td>{email}</td>
-                    <td>{text}</td>
+                    {
+                        isAdmin ? (
+                            <>
+                                <td>
+                                    <input className="form-check-input" name="status" type="checkbox" value={status} disabled />
+                                </td>
+                                <td>{username}</td>
+                                <td>{email}</td>
+                                <td>{text}</td>
+                            </>
+                        ) : (
+                            <>
+                                <td>
+                                    <input data-id={id} className="form-check-input" name="status" type="checkbox" value={status} />
+                                </td>
+                                <td>{username}</td>
+                                <td>{email}</td>
+                                <td>
+                                    <input type="text" className="form-control" placeholder="Электронная почта" name="text" value={text} required />
+                                </td>
+                                <td>
+                                    <button
+                                        onClick={this.handleChange}
+                                        type="button"
+                                        className="btn btn-primary"
+                                        data-id={id}
+                                        data-status={status}
+                                        data-text={text}
+                                    >
+                                        Сохранить
+                                    </button>
+                                </td>
+                            </>
+                        )
+                    }
                 </tr>
             )
         });

@@ -1,12 +1,13 @@
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {fetchTodo} from '../actions/todo';
+import {fetchTodo, updateTask} from '../actions/todo';
 import TodoPage from '../components/TodoPage';
 
 const mapStateToProps = state => ({todo: state.todo.todo});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    fetchTodo
+    fetchTodo,
+    updateTask
 }, dispatch);
 
 export default connect(

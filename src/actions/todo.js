@@ -54,3 +54,32 @@ export function createTask(payload) {
             }))
     };
 }
+
+export function updateTask(id, data) {
+    return (dispatch) => {
+        dispatch({
+            type: types.EDIT_TASK_REQUEST
+        })
+        return fetch(`https://uxcandy.com/~shapoval/test-task-backend/v2/edit/:${id}?developer=Alex`,
+            {
+                method: 'POST',
+                body: data
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                if (json.status === 'ok') {
+                    dispatch({
+                        type: types.EDIT_TASK_SUCCESS,
+                        payload: json.message
+                    })
+                }
+                throw new Error(json.message);
+            })
+            .catch(reason => dispatch({
+                type: types.EDIT_TASK_FAILURE,
+                payload: reason
+            }))
+    };
+}

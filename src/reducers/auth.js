@@ -4,7 +4,6 @@ const token = localStorage.getItem('token');
 
 const initialState = {
     isAuthenticated: !!token,
-    //user: null,
     token,
 };
 
@@ -15,15 +14,12 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                //user: action.payload.user,
                 token: action.payload.token
             };
         case types.RECIEVE_AUTH_SUCCESS:
             return {
                 ...state,
-                isAuthenticated: true,
-                //user: action.payload.user,
-
+                isAuthenticated: true
             }
         case types.SIGNUP_FAILURE:
         case types.LOGIN_FAILURE:
